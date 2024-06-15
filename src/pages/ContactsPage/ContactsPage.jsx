@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import ContactForm from '../../components/ContactForm/ContactForm';
 import ContactList from '../../components/ContactList/ContactList';
 import SearchBox from '../../components/SearchBox/SearchBox';
-import css from './ContactsPage.module.css';
 import { selectError, selectLoading } from '../../redux/contacts/slice';
-import { useEffect } from 'react';
 import { fetchContacts } from '../../redux/contacts/operations';
+import css from './ContactsPage.module.css';
 
 export default function ContactsPage() {
   const dispatch = useDispatch();
@@ -15,6 +15,7 @@ export default function ContactsPage() {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
+
   return (
     <div className={css.container}>
       <h1 className={css.title}>Phonebook</h1>
