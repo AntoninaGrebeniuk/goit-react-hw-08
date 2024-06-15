@@ -1,37 +1,31 @@
-import { useEffect } from 'react';
-import ContactForm from '../ContactForm/ContactForm';
-import SearchBox from '../SearchBox/SearchBox';
-import ContactList from '../ContactList/ContactList';
-import css from './App.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from '../../redux/contactsOps';
-import { selectError, selectLoading } from '../../redux/contactsSlice';
+import { Suspense, lazy } from 'react';
+import Layout from '../Layout/Layout';
+import { Route, Routes } from 'react-router-dom';
+// import ContactsPage from '../../pages/ContactsPage/ContactsPage';
+// import HomePage from '../../pages/HomePage/HomePage';
+// import RegistrationPage from '../../pages/RegistrationPage/RegistrationPage';
+// import LoginPage from '../../pages/LoginPage/LoginPage';
+
+const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
+const RegistrationPage = lazy(() =>
+  import('../../pages/RegistrationPage/RegistrationPage'),
+);
+const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
+const ContactsPage = lazy(() =>
+  import('../../pages/ContactsPage/ContactsPage'),
+);
 
 export default function App() {
-  const dispatch = useDispatch();
-  const isLoading = useSelector(selectLoading);
-  const isError = useSelector(selectError);
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
   return (
-    <div className={css.container}>
-      <h1 className={css.title}>Phonebook</h1>
-      <ContactForm />
-
-      <h2 className={css.subtitle}>Contacts</h2>
-      <div className={css.wrapper}>
-        <SearchBox />
-        {isLoading && <p className={css.message}>Loading...</p>}
-        {isError && (
-          <p className={css.error}>
-            Something went wrong! Please try reloading the page.
-          </p>
-        )}
-        <ContactList />
-      </div>
-    </div>
+    <Layout>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/registration" element={<RegistrationPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+        </Routes>
+      </Suspense>
+    </Layout>
   );
 }
