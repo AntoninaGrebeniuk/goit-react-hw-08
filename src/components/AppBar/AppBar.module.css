@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  gap: 30px;
+
+  margin-bottom: 10px;
+  width: 100%;
+
+  padding: 20px;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid var(--greyBlue);
+  -webkit-box-shadow: 0px 7px 16px -3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 7px 16px -3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 7px 16px -3px rgba(0, 0, 0, 0.5);
+  background: var(--greyBlue);
+
+  background: linear-gradient(
+    to right,
+    var(--greyBlue) 0%,
+    var(--lightGreyBlue) 29%,
+    var(--lightGreyBlue) 50%,
+    var(--lightGreyBlue) 71%,
+    var(--greyBlue) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='var(--greyBlue)', endColorstr='var(--lightGreyBlue)', GradientType=1 );
+}
+
+.header:before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+}
