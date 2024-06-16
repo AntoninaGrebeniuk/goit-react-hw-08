@@ -12,7 +12,6 @@ const authSlice = createSlice({
     isLoggedIn: false,
     isRefreshing: false,
     loading: false,
-    isRefreshing: false,
   },
   extraReducers: builder =>
     builder
